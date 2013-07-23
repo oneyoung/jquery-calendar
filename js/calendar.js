@@ -1,0 +1,7 @@
+
+(function ($) {
+	$.fn.calendar = function () {
+
+	};
+}($));
+
