@@ -53,8 +53,15 @@
 				}
 				tBody.append(tr);
 			}
+
 			/* set month head */
-			_this.find('.month').text(date.getFullYear() + "-" + date.getMonth())
+			var monthStr;
+			if (date.getMonth() == 0) { /* fix month zero base */
+				monthStr = (date.getFullYear() - 1) + '-' + 12;
+			} else {
+				monthStr = date.getFullYear() + '-' + date.getMonth();
+			}
+			_this.find('.month').text(monthStr)
 		};
 
 		_this.init();
