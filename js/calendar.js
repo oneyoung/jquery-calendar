@@ -23,7 +23,7 @@
 			_this.append(html);
 		};
 
-		_this.update = function (date) {
+		_this.update = function (date, active) {
 			var mDate = new Date(date);
 			mDate.setDate(1); /* star of the month */
 			mDate.setDate(mDate.getDate() - mDate.getDay()) /* now mDate is the start day of the table */
@@ -35,7 +35,7 @@
 				var tag = $('<td><a href="#"></a></td>');
 				if (date.getMonth() != d.getMonth()) { // the bounday month
 					tag.addClass('off');
-				} else if (date.getDate() == d.getDate()) { // the select day
+				} else if (active && date.getDate() == d.getDate()) { // the select day
 					tag.addClass('active');
 				}
 				var a = tag.find('a');
@@ -58,7 +58,31 @@
 		};
 
 		_this.init();
-		_this.update(new Date());
+		_this.update(new Date(), true);
+
+		/* event binding */
+		_this.delegate('tbody td', 'click', function () {
+			_this.find('.active').removeClass('active');
+			$(this).addClass('active');
+		});
+
+		function updateTable(monthOffset) {
+			var array = _this.find('.month').text().split('-')
+			var year = parseInt(array[0]);
+			var month = parseInt(array[1]);
+			var currentDate = new Date(year, month + monthOffset, 1);
+			_this.update(currentDate);
+		};
+
+		_this.find('.next').click(function () {
+			updateTable(1);
+
+		});
+
+		_this.find('.prev').click(function () {
+			updateTable(-1);
+		});
+
 		return this;
 	};
 }($));
