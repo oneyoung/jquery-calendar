@@ -26,7 +26,42 @@
 			_this.append(html);
 		};
 
+		_this.update = function (date) {
+			var mDate = new Date(date);
+			mDate.setDate(1); /* star of the month */
+			mDate.setDate(mDate.getDate() - mDate.getDay()) /* now mDate is the start day of the table */
+			function dateToString(d) {
+				return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
+			}
+
+			function dateToTag(d) {
+				var tag = $('<td><a href="#"></a></td>');
+				if (date.getMonth() != d.getMonth()) { // the bounday month
+					tag.addClass('off');
+				} else if (date.getDate() == d.getDate()) { // the select day
+					tag.addClass('active');
+				}
+				var a = tag.find('a');
+				a.text(d.getDate());
+				a.attr('data-date', dateToString(d));
+				return tag;
+			};
+
+			var tBody = _this.find('tbody');
+			tBody.empty(); /* clear previous first */
+			for (var i = 0; i < 5; i++) {
+				var tr = $('<tr></tr>');
+				for (var j = 0; j < 7; j++, mDate.setDate(mDate.getDate() + 1)) {
+					tr.append(dateToTag(mDate));
+				}
+				tBody.append(tr);
+			}
+			/* set month head */
+			_this.find('.month').text(date.getFullYear() + "-" + date.getMonth())
+		};
+
 		_this.init();
+		_this.update(new Date());
 		return this;
 	};
 }($));
