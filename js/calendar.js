@@ -23,10 +23,18 @@
 			_this.append(html);
 		};
 
+		function daysInMonth(d) {
+			var newDate = new Date(d);
+			newDate.setMonth(newDate.getMonth() + 1);
+			newDate.setDate(0);
+			return newDate.getDate();
+		}
+
 		_this.update = function (date, active) {
 			var mDate = new Date(date);
 			mDate.setDate(1); /* star of the month */
-			mDate.setDate(mDate.getDate() - mDate.getDay()) /* now mDate is the start day of the table */
+			var day = mDate.getDay();
+			mDate.setDate(mDate.getDate() - day) /* now mDate is the start day of the table */
 			function dateToString(d) {
 				return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
 			}
@@ -46,7 +54,8 @@
 
 			var tBody = _this.find('tbody');
 			tBody.empty(); /* clear previous first */
-			for (var i = 0; i < 5; i++) {
+			var cols = Math.ceil((day + daysInMonth(date))/7);
+			for (var i = 0; i < cols; i++) {
 				var tr = $('<tr></tr>');
 				for (var j = 0; j < 7; j++, mDate.setDate(mDate.getDate() + 1)) {
 					tr.append(dateToTag(mDate));
