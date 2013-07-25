@@ -36,7 +36,14 @@
 			var day = mDate.getDay();
 			mDate.setDate(mDate.getDate() - day) /* now mDate is the start day of the table */
 			function dateToString(d) {
-				return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
+				/* fix month zero base */
+				var year = d.getFullYear();
+				var month = d.getMonth();
+				if (month == 0) {
+					month = 12;
+					year -= 1;
+				}
+				return year + "-" + month + "-" + d.getDate()
 			}
 
 			function dateToTag(d) {
@@ -73,6 +80,10 @@
 			_this.find('.month').text(monthStr)
 		};
 
+		_this.getCurrentDate = function () {
+			return _this.find(".active a").attr('data-date');
+		}
+
 		_this.init();
 		_this.update(new Date(), true);
 
@@ -97,6 +108,34 @@
 
 		_this.find('.prev').click(function () {
 			updateTable(-1);
+		});
+
+		return this;
+	};
+
+	$.fn.datePicker = function () {
+		var _this = this;
+		var picker = $('<div></div>');
+		picker.calendar();
+		picker.css('display', 'none');  /* default invisable */
+		_this.after(picker);
+
+		/* event binding */
+		// click outside area, make calendar disappear
+		$('body').click(function () {
+			picker.css('display', 'none');
+		});
+
+		// click input should make calendar appear
+		_this.click(function () {
+			picker.css('display', '');
+			event.stopPropagation(); // stop sending event to docment
+		});
+
+		// click on calender, update input
+		picker.click(function () {
+			_this.val(picker.getCurrentDate());
+			event.stopPropagation();
 		});
 
 		return this;
