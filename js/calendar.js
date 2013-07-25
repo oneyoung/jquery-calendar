@@ -1,7 +1,29 @@
 
 (function ($) {
-	$.fn.calendar = function () {
+	/* "YYYY-MM[-DD]" => Date */
+	function strToDate(str) {
+		var array = str.split('-');
+		var year = parseInt(array[0]);
+		var month = parseInt(array[1]);
+		var day = array.length > 2? parseInt(array[2]): 1 ;
+		return new Date(year, month, day);
+	};
+
+	/* Date => "YYYY-MM-DD" */
+	function dateToStr(d) {
+		/* fix month zero base */
+		var year = d.getFullYear();
+		var month = d.getMonth();
+		if (month == 0) {
+			month = 12;
+			year -= 1;
+		}
+		return year + "-" + month + "-" + d.getDate()
+	};
+
+	$.fn.calendar = function (options) {
 		var _this = this;
+		var opts = $.extend({}, $.fn.calendar.defaults, options);
 		var week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 		var tHead = week.map(function (day) {
 			return "<th>" + day + "</th>";
@@ -35,27 +57,17 @@
 			mDate.setDate(1); /* star of the month */
 			var day = mDate.getDay();
 			mDate.setDate(mDate.getDate() - day) /* now mDate is the start day of the table */
-			function dateToString(d) {
-				/* fix month zero base */
-				var year = d.getFullYear();
-				var month = d.getMonth();
-				if (month == 0) {
-					month = 12;
-					year -= 1;
-				}
-				return year + "-" + month + "-" + d.getDate()
-			}
 
 			function dateToTag(d) {
 				var tag = $('<td><a href="#"></a></td>');
 				var a = tag.find('a');
 				a.text(d.getDate());
-				a.attr('data-date', dateToString(d));
+				a.attr('data-date', dateToStr(d));
 				if (date.getMonth() != d.getMonth()) { // the bounday month
 					tag.addClass('off');
 				} else if (active && date.getDate() == d.getDate()) { // the select day
 					tag.addClass('active');
-					_this.attr('data-date', dateToString(d));
+					_this.attr('data-date', dateToStr(d));
 				}
 				return tag;
 			};
@@ -86,7 +98,7 @@
 		}
 
 		_this.init();
-		_this.update(new Date(), true);
+		_this.update(opts.date, true);
 
 		/* event binding */
 		_this.delegate('tbody td', 'click', function () {
@@ -96,11 +108,9 @@
 		});
 
 		function updateTable(monthOffset) {
-			var array = _this.find('.month').text().split('-')
-			var year = parseInt(array[0]);
-			var month = parseInt(array[1]);
-			var currentDate = new Date(year, month + monthOffset, 1);
-			_this.update(currentDate);
+			var date = strToDate(_this.find('.month').text());
+			date.setMonth(date.getMonth() + monthOffset);
+			_this.update(date);
 		};
 
 		_this.find('.next').click(function () {
@@ -113,6 +123,10 @@
 		});
 
 		return this;
+	};
+
+	$.fn.calendar.defaults = {
+		date: new Date(),
 	};
 
 	$.fn.datePicker = function () {
@@ -144,4 +158,3 @@
 		return this;
 	};
 }($));
-
