@@ -2,11 +2,13 @@
 (function ($) {
 	/* "YYYY-MM[-DD]" => Date */
 	function strToDate(str) {
-		var array = str.split('-');
-		var year = parseInt(array[0]);
-		var month = parseInt(array[1]);
-		var day = array.length > 2? parseInt(array[2]): 1 ;
-		return new Date(year, month, day);
+		try {
+			var array = str.split('-');
+			var year = parseInt(array[0]);
+			var month = parseInt(array[1]);
+			var day = array.length > 2? parseInt(array[2]): 1 ;
+			return new Date(year, month, day);
+		} catch (err) {}; // just throw any illegal format
 	};
 
 	/* Date => "YYYY-MM-DD" */
@@ -98,7 +100,7 @@
 		}
 
 		_this.init();
-		_this.update(opts.date, true);
+		_this.update(opts.date? opts.date: new Date(), true);
 
 		/* event binding */
 		_this.delegate('tbody td', 'click', function () {
@@ -133,8 +135,9 @@
 		var _this = this;
 		var picker = $('<div></div>');
 		picker.addClass('picker-container');
-		picker.calendar();
 		picker.css('display', 'none');  /* default invisable */
+
+		picker.calendar({'date': strToDate(_this.val())});
 		_this.after(picker);
 
 		/* event binding */
