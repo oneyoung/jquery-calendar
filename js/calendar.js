@@ -160,4 +160,9 @@
 
 		return this;
 	};
+
+	$(window).load(function () {
+		$('.jquery-calendar').calendar();
+		$('.date-picker:text').datePicker();
+	});
 }($));
