@@ -48,14 +48,15 @@
 
 			function dateToTag(d) {
 				var tag = $('<td><a href="#"></a></td>');
+				var a = tag.find('a');
+				a.text(d.getDate());
+				a.attr('data-date', dateToString(d));
 				if (date.getMonth() != d.getMonth()) { // the bounday month
 					tag.addClass('off');
 				} else if (active && date.getDate() == d.getDate()) { // the select day
 					tag.addClass('active');
+					_this.attr('data-date', dateToString(d));
 				}
-				var a = tag.find('a');
-				a.text(d.getDate());
-				a.attr('data-date', dateToString(d));
 				return tag;
 			};
 
@@ -81,7 +82,7 @@
 		};
 
 		_this.getCurrentDate = function () {
-			return _this.find(".active a").attr('data-date');
+			return _this.attr('data-date');
 		}
 
 		_this.init();
@@ -91,6 +92,7 @@
 		_this.delegate('tbody td', 'click', function () {
 			_this.find('.active').removeClass('active');
 			$(this).addClass('active');
+			_this.attr('data-date', $(this).find('a').attr('data-date'));
 		});
 
 		function updateTable(monthOffset) {
