@@ -129,13 +129,13 @@
 		// click input should make calendar appear
 		_this.click(function () {
 			picker.css('display', '');
-			event.stopPropagation(); // stop sending event to docment
+			return false; // stop sending event to docment
 		});
 
 		// click on calender, update input
 		picker.click(function () {
 			_this.val(picker.getCurrentDate());
-			event.stopPropagation();
+			return false;
 		});
 
 		return this;
