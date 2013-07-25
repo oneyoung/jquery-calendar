@@ -7,7 +7,11 @@
 			var year = parseInt(array[0]);
 			var month = parseInt(array[1]);
 			var day = array.length > 2? parseInt(array[2]): 1 ;
-			return new Date(year, month, day);
+			if (year > 0 && month >= 0) {
+				return new Date(year, month, day);
+			} else {
+				return null;
+			}
 		} catch (err) {}; // just throw any illegal format
 	};
 
