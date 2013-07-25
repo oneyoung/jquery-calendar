@@ -116,6 +116,7 @@
 	$.fn.datePicker = function () {
 		var _this = this;
 		var picker = $('<div></div>');
+		picker.addClass('picker-container');
 		picker.calendar();
 		picker.css('display', 'none');  /* default invisable */
 		_this.after(picker);
