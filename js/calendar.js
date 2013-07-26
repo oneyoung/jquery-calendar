@@ -38,8 +38,8 @@
 		_this.init = function () {
 			var tpl = '<table class="cal">' +
 			'<caption>' +
-			'	<span class="prev"><a href="#">&larr;</a></span>' +
-			'	<span class="next"><a href="#">&rarr;</a></span>' +
+			'	<span class="prev"><a href="javascript:void(0);">&larr;</a></span>' +
+			'	<span class="next"><a href="javascript:void(0);">&rarr;</a></span>' +
 			'	<span class="month"><span>' +
 			"</caption>" +
 			"<thead><tr>" +
@@ -65,7 +65,7 @@
 			mDate.setDate(mDate.getDate() - day) /* now mDate is the start day of the table */
 
 			function dateToTag(d) {
-				var tag = $('<td><a href="#"></a></td>');
+				var tag = $('<td><a href="javascript:void(0);"></a></td>');
 				var a = tag.find('a');
 				a.text(d.getDate());
 				a.attr('data-date', dateToStr(d));
