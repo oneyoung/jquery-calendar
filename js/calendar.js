@@ -137,11 +137,11 @@
 
 	$.fn.datePicker = function () {
 		var _this = this;
-		var picker = $('<div></div>');
-		picker.addClass('picker-container');
-		picker.css('display', 'none');  /* default invisable */
+		var picker = $('<div></div>')
+			.addClass('picker-container')
+			.css('display', 'none')
+			.calendar({'date': strToDate(_this.val())});
 
-		picker.calendar({'date': strToDate(_this.val())});
 		_this.after(picker);
 
 		/* event binding */
@@ -159,7 +159,8 @@
 		// click on calender, update input
 		picker.click(function () {
 			_this.val(picker.getCurrentDate());
-			return false;
+			/* date-picker should disappear, so return true */
+			return true;
 		});
 
 		return this;
