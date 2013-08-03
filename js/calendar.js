@@ -167,7 +167,11 @@
 	};
 
 	$(window).load(function () {
-		$('.jquery-calendar').calendar();
-		$('.date-picker:text').datePicker();
+		$('.jquery-calendar').each(function () {
+			$(this).calendar();
+		});
+		$('.date-picker:text').each(function () {
+			$(this).datePicker();
+		});
 	});
 }($));
