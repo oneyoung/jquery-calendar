@@ -111,6 +111,9 @@
 			_this.find('.active').removeClass('active');
 			$(this).addClass('active');
 			_this.attr('data-date', $(this).find('a').attr('data-date'));
+			if (opts.picker) {  /* in picker mode, when date selected, panel hide */
+				_this.css('display', 'none');
+			}
 		});
 
 		function updateTable(monthOffset) {
@@ -133,6 +136,7 @@
 
 	$.fn.calendar.defaults = {
 		date: new Date(),
+		picker: false,
 	};
 
 	$.fn.datePicker = function () {
@@ -140,7 +144,7 @@
 		var picker = $('<div></div>')
 			.addClass('picker-container')
 			.css('display', 'none')
-			.calendar({'date': strToDate(_this.val())});
+			.calendar({'date': strToDate(_this.val()), 'picker': true});
 
 		_this.after(picker);
 
@@ -159,8 +163,7 @@
 		// click on calender, update input
 		picker.click(function () {
 			_this.val(picker.getCurrentDate());
-			/* date-picker should disappear, so return true */
-			return true;
+			return false;
 		});
 
 		return this;
