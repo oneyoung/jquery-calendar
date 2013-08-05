@@ -8,7 +8,7 @@
 			var month = parseInt(array[1]);
 			var day = array.length > 2? parseInt(array[2]): 1 ;
 			if (year > 0 && month >= 0) {
-				return new Date(year, month, day);
+				return new Date(year, month - 1, day);
 			} else {
 				return null;
 			}
@@ -20,11 +20,7 @@
 		/* fix month zero base */
 		var year = d.getFullYear();
 		var month = d.getMonth();
-		if (month == 0) {
-			month = 12;
-			year -= 1;
-		}
-		return year + "-" + month + "-" + d.getDate()
+		return year + "-" + (month + 1) + "-" + d.getDate();
 	};
 
 	$.fn.calendar = function (options) {
@@ -90,12 +86,7 @@
 			}
 
 			/* set month head */
-			var monthStr;
-			if (date.getMonth() == 0) { /* fix month zero base */
-				monthStr = (date.getFullYear() - 1) + '-' + 12;
-			} else {
-				monthStr = date.getFullYear() + '-' + date.getMonth();
-			}
+			var monthStr = dateToStr(date).replace(/-\d+$/, '');
 			_this.find('.month').text(monthStr)
 		};
 
