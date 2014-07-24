@@ -1,12 +1,12 @@
 {
     "name": "calendarDatePicker",
     "title": "Simple Calendar and Date Picker",
-    "description": "A simple calendar and date picker only depends on Jquery",
+    "description": "A simple calendar and date picker only depends on JQuery",
     "keywords": [
         "calendar",
         "datePicker"
     ],
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": {
         "name": "oneyoung",
         "url": "http://oneyoung.im/"
