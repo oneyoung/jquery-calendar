@@ -18,8 +18,9 @@
         }
     ],
     "bugs": "https://github.com/oneyoung/jquery-calendar/issues",
-    "homepage": "https://github.com/oneyoung/jquery-calendar",
-    "download": "https://github.com/oneyoung/jquery-calendar/tree/master/js",
+    "homepage": "http://oneyoung.im/jquery-calendar/",
+    "download": "https://github.com/oneyoung/jquery-calendar/zipball/master",
+    "demo": "http://oneyoung.im/jquery-calendar/demo",
     "dependencies": {
         "jquery": ">=1.8"
     }

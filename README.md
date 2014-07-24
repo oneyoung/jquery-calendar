@@ -3,6 +3,10 @@ jquery-calendar
 
 A simple calendar and date picker base on jquery
 
+## Live demo
+
+See [this page](http://oneyoung.im/jquery-calendar/demo).
+
 ## Usage
 
 ### Header
