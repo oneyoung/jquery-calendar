@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery-calendar by oneyoung</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/oneyoung/jquery-calendar">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/oneyoung/jquery-calendar/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/oneyoung/jquery-calendar/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Jquery-calendar</h1>
+          <p>A simple calendar and date picker base on jquery</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/oneyoung">oneyoung</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="jquery-calendar" class="anchor" href="#jquery-calendar"><span class="octicon octicon-link"></span></a>jquery-calendar</h1>
+
+<p>A simple calendar and date picker base on jquery</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="header" class="anchor" href="#header"><span class="octicon octicon-link"></span></a>Header</h3>
+
+<ul>
+<li>include jQuery</li>
+</ul><div class="highlight highlight-html"><pre>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<ul>
+<li>add js &amp; css</li>
+</ul><div class="highlight highlight-html"><pre>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"js/calendar.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<h3>
+<a name="calendar" class="anchor" href="#calendar"><span class="octicon octicon-link"></span></a>Calendar</h3>
+
+<p>two way invoke calendar</p>
+
+<ul>
+<li>use default class, just set your class to <code>jquery-calendar</code>
+</li>
+</ul><div class="highlight highlight-html"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"jquery-calendar"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+
+<ul>
+<li>call the plugin, with js <code>$.calendar()</code>.</li>
+</ul><div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#element'</span><span class="p">).</span><span class="nx">calendar</span><span class="p">();</span>
+<span class="cm">/* one with default date */</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#element2'</span><span class="p">).</span><span class="nx">calendar</span><span class="p">({</span><span class="s1">'date'</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()});</span>
+</pre></div>
+
+<h3>
+<a name="data-picker" class="anchor" href="#data-picker"><span class="octicon octicon-link"></span></a>Data Picker</h3>
+
+<p>Here we use the date format as <code>YYYY-MM-DD</code>. You can add a default date as value:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"date-picker"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"2013-8-1"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<p>Also, two way to use it.</p>
+
+<ul>
+<li>use default class: <code>date-picker</code>
+</li>
+</ul><div class="highlight highlight-html"><pre><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"date-picker"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<ul>
+<li>invoke with js <code>$.datePicker()</code>
+</li>
+</ul><div class="highlight highlight-html"><pre><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">load</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">".your-picker"</span><span class="p">).</span><span class="nx">datePicker</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"your-picker"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+</pre></div>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
