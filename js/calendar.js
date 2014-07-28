@@ -115,7 +115,7 @@
 				_this.update(strToDate(_this.data('date')));
 			}
 			if (opts.picker) {  /* in picker mode, when date selected, panel hide */
-				_this.css('display', 'none');
+				_this.hide();
 			}
 		});
 
@@ -146,7 +146,7 @@
 		var _this = this;
 		var picker = $('<div></div>')
 			.addClass('picker-container')
-			.css('display', 'none')
+			.hide()
 			.calendar({'date': strToDate(_this.val()), 'picker': true});
 
 		_this.after(picker);
@@ -154,12 +154,12 @@
 		/* event binding */
 		// click outside area, make calendar disappear
 		$('body').click(function () {
-			picker.css('display', 'none');
+			picker.hide();
 		});
 
 		// click input should make calendar appear
 		_this.click(function () {
-			picker.css('display', '');
+			picker.show();
 			return false; // stop sending event to docment
 		});
 
