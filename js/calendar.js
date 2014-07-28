@@ -54,7 +54,7 @@
 			return newDate.getDate();
 		}
 
-		_this.update = function (date, active) {
+		_this.update = function (date) {
 			var mDate = new Date(date);
 			mDate.setDate(1); /* star of the month */
 			var day = mDate.getDay();
@@ -102,13 +102,18 @@
 		if (opts.date || !opts.picker) {
 			_this.data('date', dateToStr(initDate));
 		}
-		_this.update(initDate, true);
+		_this.update(initDate);
 
 		/* event binding */
 		_this.delegate('tbody td', 'click', function () {
+			var $this = $(this);
 			_this.find('.active').removeClass('active');
-			$(this).addClass('active');
-			_this.data('date', $(this).find('a').data('date'));
+			$this.addClass('active');
+			_this.data('date', $this.find('a').data('date'));
+			/* if the 'off' tag become selected, switch to that month */
+			if ($this.hasClass('off')) {
+				_this.update(strToDate(_this.data('date')));
+			}
 			if (opts.picker) {  /* in picker mode, when date selected, panel hide */
 				_this.css('display', 'none');
 			}
