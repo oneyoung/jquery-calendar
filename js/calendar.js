@@ -67,7 +67,7 @@
 				a.attr('data-date', dateToStr(d));
 				if (date.getMonth() != d.getMonth()) { // the bounday month
 					tag.addClass('off');
-				} else if (active && date.getDate() == d.getDate()) { // the select day
+				} else if (_this.attr('data-date') == a.attr('data-date')) { // the select day
 					tag.addClass('active');
 					_this.attr('data-date', dateToStr(d));
 				}
@@ -95,7 +95,14 @@
 		}
 
 		_this.init();
-		_this.update(opts.date? opts.date: new Date(), true);
+		/* in date picker mode, and input date is empty,
+		 * should not update 'data-date' field (no selected).
+		 */
+		var initDate = opts.date? opts.date: new Date();
+		if (opts.date || !opts.picker) {
+			_this.attr('data-date', dateToStr(initDate));
+		}
+		_this.update(initDate, true);
 
 		/* event binding */
 		_this.delegate('tbody td', 'click', function () {
