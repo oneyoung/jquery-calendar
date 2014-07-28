@@ -64,12 +64,12 @@
 				var tag = $('<td><a href="javascript:void(0);"></a></td>');
 				var a = tag.find('a');
 				a.text(d.getDate());
-				a.attr('data-date', dateToStr(d));
+				a.data('date', dateToStr(d));
 				if (date.getMonth() != d.getMonth()) { // the bounday month
 					tag.addClass('off');
-				} else if (_this.attr('data-date') == a.attr('data-date')) { // the select day
+				} else if (_this.data('date') == a.data('date')) { // the select day
 					tag.addClass('active');
-					_this.attr('data-date', dateToStr(d));
+					_this.data('date', dateToStr(d));
 				}
 				return tag;
 			};
@@ -91,7 +91,7 @@
 		};
 
 		_this.getCurrentDate = function () {
-			return _this.attr('data-date');
+			return _this.data('date');
 		}
 
 		_this.init();
@@ -100,7 +100,7 @@
 		 */
 		var initDate = opts.date? opts.date: new Date();
 		if (opts.date || !opts.picker) {
-			_this.attr('data-date', dateToStr(initDate));
+			_this.data('date', dateToStr(initDate));
 		}
 		_this.update(initDate, true);
 
@@ -108,7 +108,7 @@
 		_this.delegate('tbody td', 'click', function () {
 			_this.find('.active').removeClass('active');
 			$(this).addClass('active');
-			_this.attr('data-date', $(this).find('a').attr('data-date'));
+			_this.data('date', $(this).find('a').data('date'));
 			if (opts.picker) {  /* in picker mode, when date selected, panel hide */
 				_this.css('display', 'none');
 			}
