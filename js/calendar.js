@@ -56,9 +56,9 @@
 
 		_this.update = function (date) {
 			var mDate = new Date(date);
-			mDate.setDate(1); /* star of the month */
-			var day = mDate.getDay();
-			mDate.setDate(mDate.getDate() - day) /* now mDate is the start day of the table */
+			mDate.setDate(1); /* start of the month */
+			var day = mDate.getDay(); /* value 0~6: 0 -- Sunday, 6 -- Saturday */
+			mDate.setDate(mDate.getDate() - day + 1) /* now mDate is the start day of the table */
 
 			function dateToTag(d) {
 				var tag = $('<td><a href="javascript:void(0);"></a></td>');
