@@ -26,7 +26,7 @@
 	$.fn.calendar = function (options) {
 		var _this = this;
 		var opts = $.extend({}, $.fn.calendar.defaults, options);
-		var week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+		var week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 		var tHead = week.map(function (day) {
 			return "<th>" + day + "</th>";
 		}).join("");
@@ -58,7 +58,7 @@
 			var mDate = new Date(date);
 			mDate.setDate(1); /* start of the month */
 			var day = mDate.getDay(); /* value 0~6: 0 -- Sunday, 6 -- Saturday */
-			mDate.setDate(mDate.getDate() - day + 1) /* now mDate is the start day of the table */
+			mDate.setDate(mDate.getDate() - day) /* now mDate is the start day of the table */
 
 			function dateToTag(d) {
 				var tag = $('<td><a href="javascript:void(0);"></a></td>');
